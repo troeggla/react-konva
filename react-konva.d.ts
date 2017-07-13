@@ -1,11 +1,26 @@
 import * as React from 'react';
 import * as Konva from 'konva';
 
-export class KonvaNodeComponent<Node extends Konva.Node, Props = Konva.NodeConfig> extends React.Component<Props, any> {
+interface EventAttributes {
+  onMouseOver?: () => void;
+  onMouseOut?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onMouseMove?: () => void;
+  onMouseUp?: () => void;
+  onMouseDown?: () => void;
+  onClick?: () => void;
+  onDoubleClick?: () => void;
+  onDragStart?: () => void;
+  onDragEnd?: () => void;
+}
+
+export class KonvaNodeComponent<Node extends Konva.Node, Props = Konva.NodeConfig> extends React.Component<Props & EventAttributes, any> {
   getPublicInstance(): Node;
   getNativeNode(): Node;
   // putEventListener(type: string, listener: Function): void;
   // handleEvent(event: Event): void;
+
 }
 
 export class KonvaContainerComponent<Container extends Konva.Container, Props = Konva.ContainerConfig> extends React.Component<Props, any> {
