@@ -47,7 +47,7 @@ export class Stage extends KonvaContainerComponent<Konva.Stage, StageProps>{
 /** Containers */
 export class Layer extends KonvaContainerComponent<Konva.Layer, Konva.LayerConfig> { }
 export class FastLayer extends KonvaContainerComponent<Konva.FastLayer, Konva.LayerConfig> { }
-export class Group extends KonvaContainerComponent<Konva.Group> { }
+export class Group extends KonvaContainerComponent<Konva.Group, Konva.ContainerConfig & EventAttributes> { }
 export class Label extends KonvaContainerComponent<Konva.Label> { }
 
 /** Shapes */
