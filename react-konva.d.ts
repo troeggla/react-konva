@@ -1,21 +1,28 @@
 import * as React from 'react';
 import * as Konva from 'konva';
 
-interface EventAttributes {
-  onMouseOver?: () => void;
-  onMouseOut?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  onMouseMove?: () => void;
-  onMouseUp?: () => void;
-  onMouseDown?: () => void;
-  onClick?: () => void;
-  onDoubleClick?: () => void;
-  onDragStart?: () => void;
-  onDragEnd?: () => void;
+export interface KonvaNodeProps {
+  onMouseOver?(evt: any): void;
+  onMouseMove?(evt: any): void;
+  onMouseOut?(evt: any): void;
+  onMouseEnter?(evt: any): void;
+  onMouseLeave?(evt: any): void;
+  onMouseDown?(evt: any): void;
+  onMouseUp?(evt: any): void;
+  onWheel?(evt: any): void;
+  onClick?(evt: any): void;
+  onDblClick?(evt: any): void;
+  onTouchStart?(evt: any): void;
+  onTouchMove?(evt: any): void;
+  onTouchEnd?(evt: any): void;
+  onTap?(evt: any): void;
+  onDblTap?(evt: any): void;
+  onDragStart?(evt: any): void;
+  onDragMove?(evt: any): void;
+  onDragEnd?(evt: any): void;
 }
 
-export class KonvaNodeComponent<Node extends Konva.Node, Props = Konva.NodeConfig> extends React.Component<Props & EventAttributes, any> {
+export class KonvaNodeComponent<Node extends Konva.Node, Props = Konva.NodeConfig> extends React.Component<Props & KonvaNodeProps> {
   getPublicInstance(): Node;
   getNativeNode(): Node;
   // putEventListener(type: string, listener: Function): void;
@@ -23,7 +30,7 @@ export class KonvaNodeComponent<Node extends Konva.Node, Props = Konva.NodeConfi
 
 }
 
-export class KonvaContainerComponent<Container extends Konva.Container, Props = Konva.ContainerConfig> extends React.Component<Props, any> {
+export class KonvaContainerComponent<Container extends Konva.Container, Props = Konva.ContainerConfig> extends React.Component<Props & KonvaNodeProps> {
   // moveChild(prevChild, lastPlacedNode, nextIndex, lastIndex): void;
   // createChild(child, afterNode, mountImage): void;
   // removeChild(child, node): void;
@@ -35,12 +42,27 @@ export class KonvaContainerComponent<Container extends Konva.Container, Props = 
 }
 
 export interface StageProps extends Pick<React.HTMLProps<any>, 'className' | 'role' | 'style' | 'tabIndex' | 'title'> {
+  x?: number;
+  y?: number;
+  name?: string;
   width?: number | string;
   height?: number | string;
+  onContentMouseOver?(evt: any): void;
+  onContentMouseMove?(evt: any): void;
+  onContentMouseOut?(evt: any): void;
+  onContentMouseDown?(evt: any): void;
+  onContentMouseUp?(evt: any): void;
+  onContentClick?(evt: any): void;
+  onContentDblClick?(evt: any): void;
+  onContentTouchStart?(evt: any): void;
+  onContentTouchMove?(evt: any): void;
+  onContentTouchEnd?(evt: any): void;
+  onContentTap?(evt: any): void;
+  onContentDblTap?(evt: any): void;
 }
 
 /** Stage */
-export class Stage extends KonvaContainerComponent<Konva.Stage, StageProps>{
+export class Stage extends KonvaContainerComponent<Konva.Stage, StageProps> {
   getStage(): Konva.Stage;
 }
 
